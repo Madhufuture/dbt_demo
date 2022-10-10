@@ -1,0 +1,13 @@
+dbt_sample:
+  outputs:
+    dev:
+      account: af69456.australia-east.azure
+      database: raw
+      password: India@123
+      role: ACCOUNTADMIN
+      schema: MYSCHEMA
+      threads: 10
+      type: snowflake
+      user: madhufuture
+      warehouse: TRANSFORMING
+  target: dev
