@@ -31,9 +31,6 @@ ENV LANG=C.UTF-8
 RUN python -m pip install --upgrade pip setuptools wheel --no-cache-dir
 
 
-# ENTRYPOINT ["dbt_sample"]
-
-
 # Create directory for dbt config
 RUN mkdir -p /root/.dbt
 

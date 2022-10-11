@@ -1,0 +1,104 @@
+PS C:\Users\madhu\source\repos\DbtDeployment> docker build -t dbt-snowflake-test .
+[+] Building 63.4s (14/14) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                                                                          0.0s
+ => => transferring dockerfile: 1.14kB                                                                                                                                                                        0.0s
+ => [internal] load .dockerignore                                                                                                                                                                             0.0s
+ => => transferring context: 2B                                                                                                                                                                               0.0s
+ => [internal] load metadata for docker.io/library/python:3.10.7-slim-bullseye                                                                                                                                2.4s
+ => [auth] library/python:pull token for registry-1.docker.io                                                                                                                                                 0.0s
+ => [internal] load build context                                                                                                                                                                             0.0s
+ => => transferring context: 7.33kB                                                                                                                                                                           0.0s
+ => CACHED [base 1/5] FROM docker.io/library/python:3.10.7-slim-bullseye@sha256:f2ee145f3bc4e061f8dfe7e6ebd427a410121495a0bd26e7622136db060c59e0                                                              0.0s
+ => [base 2/5] WORKDIR /dbt_sample                                                                                                                                                                            0.0s
+ => [base 3/5] RUN apt-get update     && apt-get dist-upgrade -y     && apt-get install -y --no-install-recommends         git         ssh-client         software-properties-common         make         b  31.6s
+ => [base 4/5] RUN python -m pip install --upgrade pip setuptools wheel --no-cache-dir                                                                                                                        3.5s
+ => [base 5/5] RUN mkdir -p /root/.dbt                                                                                                                                                                        0.5s
+ => [dbt-snowflake 1/3] RUN python -m pip install --no-cache-dir "git+https://github.com/dbt-labs/dbt-snowflake@v1.2.0#egg=dbt-snowflake"                                                                    23.3s
+ => [dbt-snowflake 2/3] COPY profiles.yml /root/.dbt/profiles.yml                                                                                                                                             0.0s
+ => [dbt-snowflake 3/3] COPY . /dbt_sample                                                                                                                                                                    0.0s
+ => exporting to image                                                                                                                                                                                        1.9s
+ => => exporting layers                                                                                                                                                                                       1.9s
+ => => writing image sha256:320d2d7e2f83e8d9a4b8dec4cac737585ca71a765041b8fc7e0f22535e8b6aef                                                                                                                  0.0s
+ => => naming to docker.io/library/dbt-snowflake-test                                                                                                                                                         0.0s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+PS C:\Users\madhu\source\repos\DbtDeployment> docker run -p 8581:8580 --name dbt_run -v "/$(pwd)/dbt_sample" -it dbt-snowflake-test
+docker: Error response from daemon: Conflict. The container name "/dbt_run" is already in use by container "fa8bf79d4fbfdc5abef309c4c4c78b7c6827fd2a952ff14be0053527c3601816". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+PS C:\Users\madhu\source\repos\DbtDeployment> docker run -p 8581:8580 --name dbt_run -v "/$(pwd)/dbt_sample" -it dbt-snowflake-test
+docker: Error response from daemon: failed to create shim: OCI runtime create failed: container_linux.go:380: starting container process caused: exec: "dbt_sample": executable file not found in $PATH: unknown.
+PS C:\Users\madhu\source\repos\DbtDeployment> docker build -t dbt-snowflake-test .
+[+] Building 2.4s (14/14) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                                                                          0.0s
+ => => transferring dockerfile: 1.14kB                                                                                                                                                                        0.0s
+ => [internal] load .dockerignore                                                                                                                                                                             0.0s
+ => => transferring context: 2B                                                                                                                                                                               0.0s
+ => [internal] load metadata for docker.io/library/python:3.10.7-slim-bullseye                                                                                                                                2.3s
+ => [auth] library/python:pull token for registry-1.docker.io                                                                                                                                                 0.0s
+ => [base 1/5] FROM docker.io/library/python:3.10.7-slim-bullseye@sha256:f2ee145f3bc4e061f8dfe7e6ebd427a410121495a0bd26e7622136db060c59e0                                                                     0.0s
+ => [internal] load build context                                                                                                                                                                             0.0s
+ => => transferring context: 7.34kB                                                                                                                                                                           0.0s
+ => CACHED [base 2/5] WORKDIR /dbt_sample                                                                                                                                                                     0.0s
+ => CACHED [base 3/5] RUN apt-get update     && apt-get dist-upgrade -y     && apt-get install -y --no-install-recommends         git         ssh-client         software-properties-common         make      0.0s
+ => CACHED [base 4/5] RUN python -m pip install --upgrade pip setuptools wheel --no-cache-dir                                                                                                                 0.0s
+ => CACHED [base 5/5] RUN mkdir -p /root/.dbt                                                                                                                                                                 0.0s
+ => CACHED [dbt-snowflake 1/3] RUN python -m pip install --no-cache-dir "git+https://github.com/dbt-labs/dbt-snowflake@v1.2.0#egg=dbt-snowflake"                                                              0.0s
+ => CACHED [dbt-snowflake 2/3] COPY profiles.yml /root/.dbt/profiles.yml                                                                                                                                      0.0s
+ => [dbt-snowflake 3/3] COPY . /dbt_sample                                                                                                                                                                    0.0s
+ => exporting to image                                                                                                                                                                                        0.0s
+ => => exporting layers                                                                                                                                                                                       0.0s
+ => => writing image sha256:51861524d67938c9c5a260742942ec6a55c754b60ac2d83b599c043aadf4f0d8                                                                                                                  0.0s
+ => => naming to docker.io/library/dbt-snowflake-test                                                                                                                                                         0.0s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+PS C:\Users\madhu\source\repos\DbtDeployment> docker run -p 8581:8580 --name dbt_run -v "/$(pwd)/dbt_sample" -it dbt-snowflake-test
+Python 3.10.7 (main, Oct  5 2022, 14:44:35) [GCC 10.2.1 20210110] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> help
+Type help() for interactive help, or help(object) for help about object.
+>>> help()
+
+Welcome to Python 3.10's help utility!
+
+If this is your first time using Python, you should definitely check out
+the tutorial on the internet at https://docs.python.org/3.10/tutorial/.
+
+Enter the name of any module, keyword, or topic to get help on writing
+Python programs and using Python modules.  To quit this help utility and
+return to the interpreter, just type "quit".
+
+To get a list of available modules, keywords, symbols, or topics, type
+"modules", "keywords", "symbols", or "topics".  Each module also comes
+with a one-line summary of what it does; to list the modules whose name
+or summary contain a given string such as "spam", type "modules spam".
+
+help> docker run
+No Python documentation found for 'docker run'.
+Use help() to get the interactive help utility.
+Use help(str) for help on the str class.
+
+help>
+You are now leaving help and returning to the Python interpreter.
+If you want to ask for help on a particular object directly from the
+interpreter, you can type "help(object)".  Executing "help('string')"
+has the same effect as typing a particular string at the help> prompt.
+>>>
+KeyboardInterrupt
+>>> exit
+Use exit() or Ctrl-D (i.e. EOF) to exit
+>>> exit()
+PS C:\Users\madhu\source\repos\DbtDeployment> docker run -p 8581:8580 --name dbt_run -v "/$(pwd)/dbt_sample" -it dbt-snowflake-test --entrypoint /bin/bash
+docker: Error response from daemon: failed to create shim: OCI runtime create failed: container_linux.go:380: starting container process caused: exec: "--entrypoint": executable file not found in $PATH: unknown.
+PS C:\Users\madhu\source\repos\DbtDeployment> docker run -p 8581:8580 --name dbt_run -v "/$(pwd)/dbt_sample" -it dbt-snowflake-test
+docker: Error response from daemon: Conflict. The container name "/dbt_run" is already in use by container "6601436079b289a89c4028761ac0f8c2c6ee9a9ee4e7d242063ad3c31a9ebd0d". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+PS C:\Users\madhu\source\repos\DbtDeployment> docker run -p 8581:8580 --name dbt_run -v "/$(pwd)/dbt_sample" -it dbt-snowflake-test
+Python 3.10.7 (main, Oct  5 2022, 14:44:35) [GCC 10.2.1 20210110] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> dbt debug
+  File "<stdin>", line 1
+    dbt debug
+        ^^^^^
+SyntaxError: invalid syntax
+>>> exit()
+PS C:\Users\madhu\source\repos\DbtDeployment>
