@@ -51,6 +51,16 @@ COPY . /usr/app/dbt/
 
 ENTRYPOINT ["dbt"]
 
+
+
+# docker build --tag dbt-snowflake-test-3 --target dbt-snowflake .
+# docker run -v "/$(pwd)/dbt" -it dbt-snowflake-test-3 debug
+# docker run -v "/$(pwd)/dbt" -it dbt-snowflake-test-3 run
+
+# docker run -p 8581:8580 --name <some name> -v "/$(pwd)/dbt" -it dbt-snowflake-test-3 debug
+# docker run -p 8581:8580 --name <some name> -v "/$(pwd)/dbt" -it dbt-snowflake-test-3 run
+
+
 ##
 # dbt-core
 ##
